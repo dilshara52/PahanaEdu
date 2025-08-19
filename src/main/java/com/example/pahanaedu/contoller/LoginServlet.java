@@ -1,6 +1,6 @@
 package com.example.pahanaedu.contoller;
 
-import com.example.pahanaedu.doa.UserDAO;
+import com.example.pahanaedu.dao.UserDAO;
 import com.example.pahanaedu.model.User;
 
 import jakarta.servlet.ServletException;
