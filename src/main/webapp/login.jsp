@@ -37,7 +37,6 @@
     </form>
 </div>
 
-<!-- JSTL taglib (if using JSTL) -->
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 </body>
 </html>
