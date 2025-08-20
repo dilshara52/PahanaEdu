@@ -22,6 +22,32 @@ public class CustomerDAO {
         }
     }
 
+    public Customer findByAccountNo(String accountNo) {
+        String sql = "SELECT account_no, name, address, phone, units, created_at " +
+                "FROM customers WHERE account_no = ?";
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, accountNo);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Customer c = new Customer();
+                    c.setAccountNo(rs.getString("account_no"));
+                    c.setName(rs.getString("name"));
+                    c.setAddress(rs.getString("address"));
+                    c.setPhone(rs.getString("phone"));
+                    c.setUnits(rs.getInt("units"));
+                    // if you want created_at available in model:
+                    // c.setCreatedAt(rs.getTimestamp("created_at"));
+                    return c;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public boolean insert(Customer c) {
         String sql = "INSERT INTO customers (account_no, name, address, phone, units) VALUES (?, ?, ?, ?, ?)";
         try (Connection con = DBConnection.getConnection();
